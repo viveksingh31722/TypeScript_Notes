@@ -18,7 +18,7 @@ function identityThree<Type>(val: Type) : Type { // This generic function is def
 }
 
 // identityThree(5); // Here we are passing the value as 5, which is a number, so the return type will also be a number.
-// identityThree("Vivek"); // Here we are passing the value as "3", which is a string, so the return type will also be a string.
+// identityThree("3"); // Here we are passing the value as "3", which is a string, so the return type will also be a string.
 
 // The different syntax for the generic function.
 
@@ -43,7 +43,59 @@ function getSearchProducts<T>(products: T[]) : T { // Here the return type is T,
 // Arrow function syntax for the generic function.
 // const getSearchProducts = <T>() : T// return type. => {}; Syntax for the generic arrow function, just added the <T> before the function name. 
  
-const getMoreSearchProducts = <T>(product: T[]) : T => {
+const getMoreSearchProducts = <T,>(product: T[]) : T => { // The comma after <T,> is used to represent that it is not a any tag, it is a representation of the "Generic Type";
   const myIndex = 2;
   return product[myIndex];
+}
+
+// From here we are going learn about the generic class, which is similar to the generic function, but it is a class that can take any type of value and return the same type of value.
+
+// function anotherFunction<T, U extends number>(valOne: T, valTwo: U): object {
+//   return {
+//     valOne,
+//     valTwo
+//   }
+// } // This function takes any number of values as parameters and returns an object the using the generic type.
+
+// anotherFunction("vivek", 4);
+
+// Defining the interface.
+
+interface Database {
+  connection: string,
+  username: string,
+  password: string
+}
+
+function anotherFunction<T, U extends Database>(valOne: T, valTwo: U): object {
+  return {
+    valOne,
+    valTwo
+  }
+}
+
+anotherFunction("vivek",{
+  connection: "localhost",
+  username: "root",
+  password: "password"
+}) // This function takes any number of values as parameters and returns an object, but here we are using the interface Database as the type parameter for the second parameter, which means it will take the value of type Database and return the same type of value.
+
+ interface Quiz {
+  name: string,
+  type: string,
+ }
+
+ interface Course {
+  name: string,
+  author: string,
+  subject: string
+ }
+
+class sellable<T> {
+
+  public cart: T[] = [];
+
+   addToCart(product: T) {
+    this.cart.push(product);
+  }
 }
